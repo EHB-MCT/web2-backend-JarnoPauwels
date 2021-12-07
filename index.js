@@ -48,7 +48,7 @@ app.get('/coursedata', async (req, res) => {
 // save data
 app.post('/coursedata', async (req, res) => {
 
-    if (!req.body.name || !req.body.points || !req.body.course) {
+    if (!req.body.user || !req.body.score) {
         res.status(400).send('Bad request: missing name, points or course');
         return;
     }
@@ -62,7 +62,7 @@ app.post('/coursedata', async (req, res) => {
 
         // Validation for double coursedata
         const coursedata = await colli.findOne({
-            user: req.body.name,
+            user: req.body.user,
             score: req.body.score,
         });
         if (coursedata) {
@@ -71,7 +71,7 @@ app.post('/coursedata', async (req, res) => {
         }
         // Create the new challenge object
         let newData = {
-            user: req.body.name,
+            user: req.body.user,
             score: req.body.score,
         }
 
