@@ -57,16 +57,15 @@ app.post('/coursedata', async (req, res) => {
         //connect to the db
         await client.connect();
 
-        //retrieve the challenge collection data
+        //retrieve the coursedata collection data
         const colli = client.db('courseproject').collection('coursedata');
 
-        // Validation for double challenges
-        const challenge = await colli.findOne({
-            name: req.body.name,
-            points: req.body.points,
-            course: req.body.course
+        // Validation for double coursedata
+        const coursedata = await colli.findOne({
+            user: req.body.name,
+            score: req.body.score,
         });
-        if (challenge) {
+        if (coursedata) {
             res.status(400).send('Bad request: challenge already exists with ' + 'name ' + req.body.name + 'points ' + req.body.points + 'cousre ' + req.body.course);
             return;
         }
