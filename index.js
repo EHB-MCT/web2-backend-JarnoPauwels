@@ -1,4 +1,5 @@
 const express = require('express');
+var cors = require('cors')
 const bodyParser = require('body-parser');
 const {
     MongoClient,
@@ -13,7 +14,7 @@ const port = process.env.PORT
 
 app.use(express.static('public'));
 app.use(bodyParser.json());
-
+app.use(cors());
 
 //Root route
 app.get('/', (req, res) => {
@@ -64,6 +65,8 @@ app.post('/coursedata', async (req, res) => {
         const coursedata = await colli.findOne({
             user: req.body.user,
             score: req.body.score,
+            game: gameName,
+            desc: gameDesc,
         });
         if (coursedata) {
             res.status(400).send('Bad request: challenge already exists with ' + 'name ' + req.body.name + 'points ' + req.body.points + 'cousre ' + req.body.course);
@@ -73,6 +76,8 @@ app.post('/coursedata', async (req, res) => {
         let newData = {
             user: req.body.user,
             score: req.body.score,
+            game: gameName,
+            desc: gameDesc,
         }
 
         // Insert into the database
