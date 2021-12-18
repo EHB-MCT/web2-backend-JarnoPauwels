@@ -65,8 +65,8 @@ app.post('/coursedata', async (req, res) => {
         const coursedata = await colli.findOne({
             user: req.body.user,
             score: req.body.score,
-            game: gameName,
-            desc: gameDesc,
+            game: req.body.game,
+            desc: req.body.desc,
         });
         if (coursedata) {
             res.status(400).send('Bad request: challenge already exists with ' + 'name ' + req.body.name + 'points ' + req.body.points + 'cousre ' + req.body.course);
@@ -76,8 +76,8 @@ app.post('/coursedata', async (req, res) => {
         let newData = {
             user: req.body.user,
             score: req.body.score,
-            game: gameName,
-            desc: gameDesc,
+            game: req.body.game,
+            desc: req.body.desc,
         }
 
         // Insert into the database
