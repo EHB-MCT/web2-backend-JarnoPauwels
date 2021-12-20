@@ -97,6 +97,40 @@ app.post('/coursedata', async (req, res) => {
     }
 });
 
+app.delete('/coursedata', async (req,res) => {
+    //id is located in the query: req.params.id
+    try{
+        //connect to the db
+        await client.connect();
+
+        //retrieve the challenge collection data
+        const colli = client.db('courseproject').collection('coursedata');
+
+        //only look for a challenge with this ID
+        const query = { _id: ObjectId(req.params.id) };
+
+        const challenge = await colli.deleteOne({ _id: ObjectId(req.params.id) });
+
+        if(challenge){
+            //Send back the file
+            res.status(200).send(challenge);
+            return;
+        }else{
+            res.status(400).send('err');
+        }
+      
+    }catch(error){
+        console.log(error);
+        res.status(500).send({
+            error: 'Something went wrong',
+            value: error
+        });
+    }finally {
+        await client.close();
+    }
+});
+
+
 app.listen(port, () => {
     console.log(`API is running at http://localhost:${port}`);
 })
