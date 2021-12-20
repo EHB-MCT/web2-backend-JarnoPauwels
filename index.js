@@ -16,7 +16,7 @@ app.use(express.static('public'));
 app.use(bodyParser.json());
 
 var corsOptions = {
-  origin: 'http://localhost:${port}',
+  origin: 'http://localhost:5500',
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
 
