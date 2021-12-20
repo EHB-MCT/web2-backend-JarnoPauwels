@@ -67,6 +67,7 @@ app.post('/coursedata', async (req, res) => {
             score: req.body.score,
             game: req.body.game,
             desc: req.body.desc,
+            img: req.body.img
         });
         if (coursedata) {
             res.status(400).send('Bad request: challenge already exists with ' + 'name ' + req.body.name + 'points ' + req.body.points + 'cousre ' + req.body.course);
@@ -78,6 +79,7 @@ app.post('/coursedata', async (req, res) => {
             score: req.body.score,
             game: req.body.game,
             desc: req.body.desc,
+            img: req.body.img
         }
 
         // Insert into the database
