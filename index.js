@@ -97,7 +97,7 @@ app.post('/coursedata', async (req, res) => {
     }
 });
 
-app.delete('/coursedata', async (req,res) => {
+app.delete('/coursedata/:id', async (req,res) => {
     //id is located in the query: req.params.id
     try{
         //connect to the db
