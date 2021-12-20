@@ -1,5 +1,5 @@
 const express = require('express');
-var cors = require('cors')
+var cors = require('cors');
 const bodyParser = require('body-parser');
 const {
     MongoClient,
@@ -14,7 +14,13 @@ const port = process.env.PORT
 
 app.use(express.static('public'));
 app.use(bodyParser.json());
-app.use(cors());
+
+var corsOptions = {
+  origin: 'http://localhost:${port}',
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
+
+app.use(cors(corsOptions));
 
 //Root route
 app.get('/', (req, res) => {
@@ -48,7 +54,6 @@ app.get('/coursedata', async (req, res) => {
 
 // save data
 app.post('/coursedata', async (req, res) => {
-
     if (!req.body.user || !req.body.score) {
         res.status(400).send('Bad request: missing name, points or course');
         return;
