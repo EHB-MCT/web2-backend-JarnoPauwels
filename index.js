@@ -83,7 +83,7 @@ app.post('/coursedata', async (req, res) => {
         }
 
         // Insert into the database
-        let insertResult = await colli.insertOne(newData);
+        let insertResult = await colli.insertMany(newData);
 
         //Send back successmessage
         res.status(201).json(newData);
