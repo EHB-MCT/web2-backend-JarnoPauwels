@@ -51,8 +51,8 @@ app.get('/coursedata', async (req, res) => {
 
 // save data
 app.post('/coursedata', async (req, res) => {
-    if (!req.body.user || !req.body.score) {
-        res.status(400).send('Bad request: missing name, points or course');
+    if (!req.body.game || !req.body.desc) {
+        res.status(400).send('Bad request: missing name and/or description');
         return;
     }
 
