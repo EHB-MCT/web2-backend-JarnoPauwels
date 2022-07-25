@@ -65,8 +65,8 @@ app.post('/coursedata', async (req, res) => {
 
         // Validation for double coursedata
         const coursedata = await colli.findOne({
-            user: req.body.user,
-            score: req.body.score,
+            // user: req.body.user,
+            // score: req.body.score,
             game: req.body.game,
             desc: req.body.desc,
             img: req.body.img
@@ -77,8 +77,8 @@ app.post('/coursedata', async (req, res) => {
         }
         // Create the new challenge object
         let newData = {
-            user: req.body.user,
-            score: req.body.score,
+            // user: req.body.user,
+            // score: req.body.score,
             game: req.body.game,
             desc: req.body.desc,
             img: req.body.img
