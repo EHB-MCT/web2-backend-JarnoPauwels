@@ -25,14 +25,14 @@ app.get('/', (req, res) => {
 });
 
 // Return all challenges from the database
-app.get('/coursedata', async (req, res) => {
+app.get('/games', async (req, res) => {
 
     try {
         //connect to the db
         await client.connect();
 
         //retrieve the challenges collection data
-        const colli = client.db('courseproject').collection('coursedata');
+        const colli = client.db('courseproject').collection('games');
         const chs = await colli.find({}).toArray();
 
         //Send back the data with the response
@@ -50,7 +50,7 @@ app.get('/coursedata', async (req, res) => {
 
 
 // save data
-app.post('/coursedata', async (req, res) => {
+app.post('/games', async (req, res) => {
     if (!req.body.game || !req.body.desc) {
         res.status(400).send('Bad request: missing name and/or description');
         return;
@@ -101,14 +101,14 @@ app.post('/coursedata', async (req, res) => {
     }
 });
 
-app.delete('/coursedata/:id', async (req,res) => {
+app.delete('/games/:id', async (req,res) => {
     //id is located in the query: req.params.id
     try{
         //connect to the db
         await client.connect();
 
         //retrieve the challenge collection data
-        const colli = client.db('courseproject').collection('coursedata');
+        const colli = client.db('courseproject').collection('games');
 
         //only look for a challenge with this ID
         const query = { _id: ObjectId(req.params.id) };
