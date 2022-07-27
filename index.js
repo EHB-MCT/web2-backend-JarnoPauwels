@@ -61,17 +61,17 @@ app.post('/games', async (req, res) => {
         await client.connect();
 
         //retrieve the coursedata collection data
-        const colli = client.db('courseproject').collection('coursedata');
+        const colli = client.db('courseproject').collection('games');
 
         // Validation for double coursedata
-        const coursedata = await colli.findOne({
+        const games = await colli.findOne({
             // user: req.body.user,
             // score: req.body.score,
             game: req.body.game,
             desc: req.body.desc,
             img: req.body.img
         });
-        if (coursedata) {
+        if (games) {
             res.status(400).send('Bad request: challenge already exists with ' + 'name ' + req.body.name + 'points ' + req.body.points + 'cousre ' + req.body.course);
             return;
         }
